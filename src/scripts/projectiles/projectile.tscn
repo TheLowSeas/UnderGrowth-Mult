@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/scripts/projectiles/fire_wave.gd" type="Script" id=1]
+[ext_resource path="res://flame_wave_small.png" type="Texture" id=2]
+[ext_resource path="res://src/scripts/Hitboxes/HurtBox.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 2.73015
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 1.598
+
+[node name="projectile" type="KinematicBody2D"]
+position = Vector2( -0.644882, -0.248032 )
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="flame_wave_small" type="Sprite" parent="."]
+position = Vector2( 0.748919, 0.317522 )
+texture = ExtResource( 2 )
+
+[node name="HurtBoxPiv" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0.897738, -1.96437 )
+
+[node name="HurtBox" parent="HurtBoxPiv" index="0"]
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="HurtBoxPiv/HurtBox" index="0"]
+position = Vector2( -0.0992126, 1.98425 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[editable path="HurtBoxPiv"]

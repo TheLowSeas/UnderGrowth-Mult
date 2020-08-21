@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://src/actors/scare_crow/scare_crow.gd" type="Script" id=1]
+[ext_resource path="res://src/scripts/Hitboxes/HurtBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Enemys/ScareCrow.png" type="Texture" id=3]
+[ext_resource path="res://src/scripts/Hitboxes/HitBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/scripts/zones/vision.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/scripts/projectiles/projectile_spawner.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 3.94193
+height = 0.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.65221
+height = 7.0794
+
+[sub_resource type="CapsuleShape2D" id=3]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 416.172
+
+[node name="scare_crow" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 28
+script = ExtResource( 1 )
+atk_cooldown = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.0983393, 1.75771 )
+shape = SubResource( 1 )
+
+[node name="scare_crow" type="Sprite" parent="."]
+position = Vector2( 0.00107193, -10.739 )
+texture = ExtResource( 3 )
+
+[node name="HitBox" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2.21689, 3.30859 )
+scale = Vector2( 1.43933, 1.61436 )
+collision_mask = 1
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( -1.31101, -7.49153 )
+shape = SubResource( 2 )
+
+[node name="HurtBoxPiv" parent="." instance=ExtResource( 2 )]
+position = Vector2( -0.0886879, -5.5439 )
+scale = Vector2( 0.949688, 0.758251 )
+
+[node name="HurtBox" parent="HurtBoxPiv" index="0"]
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="HurtBoxPiv/HurtBox" index="0"]
+position = Vector2( 0.561867, -3.93305 )
+shape = SubResource( 3 )
+
+[node name="vision" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0.0657043, -0.892006 )
+scale = Vector2( 0.55739, 0.542252 )
+
+[node name="CollisionShape2D" parent="vision" index="0"]
+position = Vector2( 0.634289, 0.65201 )
+shape = SubResource( 4 )
+
+[node name="projectile_spawner" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0.202185, -13.7016 )
+
+[node name="attack_timer" type="Timer" parent="."]
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
+
+[editable path="HitBox"]
+
+[editable path="HurtBoxPiv"]
+
+[editable path="vision"]
