@@ -1,160 +1,322 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/actors/player/player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Player/knight_sheild.png" type="Texture" id=2]
 [ext_resource path="res://src/scripts/Hitboxes/HurtBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/scripts/Hitboxes/HitBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Weapons/Sword.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Player/Chops-Sheet.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/knight_body.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/knight_head.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.75539
 height = 2.08908
 
-[sub_resource type="Animation" id=2]
-resource_name = "Idle Left"
-length = 0.5
-loop = true
-step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("Chops_Sheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 16, 17 ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "Idle Right"
-length = 0.5
-loop = true
-step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("Chops_Sheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 2, 3 ]
-}
-
-[sub_resource type="Animation" id=4]
-length = 0.6
-loop = true
-step = 0.15
-tracks/0/type = "value"
-tracks/0/path = NodePath("Chops_Sheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 18, 19, 20, 21 ]
-}
-
-[sub_resource type="Animation" id=5]
-length = 0.6
-loop = true
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath("Chops_Sheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 4, 5, 6, 7 ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "slash effect"
-length = 0.25
-loop = true
-step = 0.01
-
-[sub_resource type="AnimationNodeAnimation" id=7]
-animation = "Idle Left"
-
-[sub_resource type="AnimationNodeAnimation" id=8]
-animation = "Idle Left"
-
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "Idle Right"
-
-[sub_resource type="AnimationNodeAnimation" id=10]
-animation = "Idle Right"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=11]
-blend_point_0/node = SubResource( 7 )
-blend_point_0/pos = Vector2( -1.1, 1 )
-blend_point_1/node = SubResource( 8 )
-blend_point_1/pos = Vector2( -1.1, -1.1 )
-blend_point_2/node = SubResource( 9 )
-blend_point_2/pos = Vector2( 1, 1 )
-blend_point_3/node = SubResource( 10 )
-blend_point_3/pos = Vector2( 1, -1.1 )
-min_space = Vector2( -1.1, -1.1 )
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id=12]
-animation = "RunLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=13]
-animation = "RunLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=14]
-animation = "RunRight"
-
-[sub_resource type="AnimationNodeAnimation" id=15]
-animation = "RunRight"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=16]
-blend_point_0/node = SubResource( 12 )
-blend_point_0/pos = Vector2( -1.1, 1 )
-blend_point_1/node = SubResource( 13 )
-blend_point_1/pos = Vector2( -1.1, -1.1 )
-blend_point_2/node = SubResource( 14 )
-blend_point_2/pos = Vector2( 1, 1 )
-blend_point_3/node = SubResource( 15 )
-blend_point_3/pos = Vector2( 1, -1.1 )
-min_space = Vector2( -1.1, -1.1 )
-blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
-
-[sub_resource type="AnimationNodeStateMachine" id=19]
-states/Idle/node = SubResource( 11 )
-states/Idle/position = Vector2( 575, 95 )
-states/Run/node = SubResource( 16 )
-states/Run/position = Vector2( 742, 95 )
-transitions = [ "Idle", "Run", SubResource( 17 ), "Run", "Idle", SubResource( 18 ) ]
-start_node = "Idle"
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
-
-[sub_resource type="CapsuleShape2D" id=21]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 3.29744
 height = 8.77289
 
-[sub_resource type="CapsuleShape2D" id=22]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 7.12335
 height = 11.763
+
+[sub_resource type="Animation" id=4]
+resource_name = "Idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/hip/spine/arm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -31.7702, -0.00411198 ), Vector2( -31.7702, -0.0164479 ), Vector2( -31.7702, -0.00822395 ), Vector2( -31.7702, -0.00411197 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/hip/spine/arm:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Skeleton2D/hip/left_leg:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 2 ), Vector2( -1, 2 ), Vector2( -1, 2 ), Vector2( -1, 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Skeleton2D/hip/left_leg:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Skeleton2D/hip/right_leg:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.02372, 2 ), Vector2( 1.02372, 2 ), Vector2( 1.02372, 2 ), Vector2( 1.02372, 2 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Skeleton2D/hip/right_leg:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Skeleton2D/hip/spine:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, -2 ), Vector2( 0, -2 ), Vector2( 0, -2 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Skeleton2D/hip/spine:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Skeleton2D/hip/spine/head:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10.5901, 0.0411198 ), Vector2( 10.8413, 0.0328958 ), Vector2( 10.7695, 0.0352455 ), Vector2( 10.5901, 0.0411198 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Skeleton2D/hip/spine/head:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Skeleton2D/hip:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, -2 ), Vector2( -1, -2 ), Vector2( -1, -2 ), Vector2( -1, -2 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Skeleton2D/hip:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Run"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/hip/spine/arm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -31.7702, -0.00411197 ), Vector2( -31.7702, 5.58794e-09 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/hip/spine/arm:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Skeleton2D/hip/left_leg:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 2 ), Vector2( 0, 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Skeleton2D/hip/left_leg:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Skeleton2D/hip/right_leg:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.02372, 2 ), Vector2( 0, 2 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Skeleton2D/hip/right_leg:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Skeleton2D/hip/spine:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Skeleton2D/hip/spine:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Skeleton2D/hip/spine/head:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10.5901, 0.0411198 ), Vector2( 10.5901, 0.0328958 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Skeleton2D/hip/spine/head:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Skeleton2D/hip:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, -2 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Skeleton2D/hip:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [node name="PlayerRoot" type="KinematicBody2D"]
 collision_layer = 2147483656
@@ -167,13 +329,6 @@ position = Vector2( 0.0928307, -1.11961 )
 rotation = -1.5708
 shape = SubResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/Idle Left" = SubResource( 2 )
-"anims/Idle Right" = SubResource( 3 )
-anims/RunLeft = SubResource( 4 )
-anims/RunRight = SubResource( 5 )
-"anims/slash effect" = SubResource( 6 )
-
 [node name="SwordPivot" type="Position2D" parent="."]
 position = Vector2( 0, -3.5 )
 
@@ -184,20 +339,6 @@ texture = ExtResource( 5 )
 
 [node name="SlashEffectSpawn" type="Position2D" parent="SwordPivot"]
 position = Vector2( 0.0237212, 2.38589 )
-
-[node name="Chops_Sheet" type="Sprite" parent="."]
-position = Vector2( 0, -14.3774 )
-texture = ExtResource( 6 )
-hframes = 28
-frame = 17
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 19 )
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource( 20 )
-parameters/Idle/blend_position = Vector2( -0.918175, 0.131034 )
-parameters/Run/blend_position = Vector2( 0.257956, -0.0318966 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1, -3.5 )
@@ -218,7 +359,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( -0.500565, -4.92222 )
-shape = SubResource( 21 )
+shape = SubResource( 2 )
 
 [node name="HurtBoxPiv" parent="." instance=ExtResource( 3 )]
 
@@ -227,8 +368,84 @@ collision_layer = 1
 
 [node name="CollisionShape2D" parent="HurtBoxPiv/HurtBox" index="0"]
 position = Vector2( 10.0113, -4.58851 )
-shape = SubResource( 22 )
+shape = SubResource( 3 )
 disabled = true
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+visible = false
+
+[node name="hip" type="Bone2D" parent="Skeleton2D"]
+position = Vector2( -1, -2 )
+rest = Transform2D( 1, 0, 0, 1, -1, -2 )
+
+[node name="spine" type="Bone2D" parent="Skeleton2D/hip"]
+position = Vector2( 0, -2 )
+scale = Vector2( 0.0944282, -121.596 )
+rest = Transform2D( 0.0944282, 0, 0, -121.596, 0, -2 )
+
+[node name="head" type="Bone2D" parent="Skeleton2D/hip/spine"]
+position = Vector2( 10.7097, 0.0372036 )
+rest = Transform2D( 1, 0, 0, 1, 10.5901, 0.0411198 )
+
+[node name="arm" type="Bone2D" parent="Skeleton2D/hip/spine"]
+position = Vector2( -31.7702, -0.00685328 )
+rest = Transform2D( 1, 0, 0, 1, -31.7702, -0.00822395 )
+
+[node name="left_leg" type="Bone2D" parent="Skeleton2D/hip"]
+position = Vector2( -1, 2 )
+scale = Vector2( 0.0216526, 0.914248 )
+rest = Transform2D( 0.0216526, 0, 0, 0.914248, -1, 2 )
+
+[node name="right_leg" type="Bone2D" parent="Skeleton2D/hip"]
+position = Vector2( 1.02372, 2 )
+scale = Vector2( 0.0408497, 0.738228 )
+rest = Transform2D( 0.0408497, 0, 0, 0.738228, 1.02372, 2 )
+
+[node name="polygons" type="Node2D" parent="."]
+
+[node name="body" type="Polygon2D" parent="polygons"]
+position = Vector2( -9, -16 )
+texture = ExtResource( 6 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 4, 10, 4, 15, 12, 15, 12, 10 )
+uv = PoolVector2Array( 4, 10, 4, 15, 12, 15, 12, 10 )
+bones = [ NodePath("hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/left_leg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/right_leg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/spine"), PoolRealArray( 1, 1, 1, 1 ), NodePath("hip/spine/head"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/spine/arm"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="head" type="Polygon2D" parent="polygons"]
+position = Vector2( -8, -16 )
+texture = ExtResource( 7 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 14, 12, 2, 12, 2, 0, 14, 0 )
+uv = PoolVector2Array( 14, 12, 2, 12, 2, 0, 14, 0 )
+bones = [ NodePath("hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/left_leg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/right_leg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/spine"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/spine/head"), PoolRealArray( 1, 1, 1, 1 ), NodePath("hip/spine/arm"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="shield" type="Polygon2D" parent="polygons"]
+position = Vector2( -12, -15 )
+texture = ExtResource( 2 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 4, 8, 4, 15, 13, 15, 13, 8 )
+uv = PoolVector2Array( 4, 8, 4, 15, 13, 15, 13, 8 )
+bones = [ NodePath("hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/left_leg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/right_leg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/spine"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/spine/head"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/spine/arm"), PoolRealArray( 1, 1, 1, 1 ) ]
+
+[node name="left_leg" type="Polygon2D" parent="polygons"]
+position = Vector2( -12, -16 )
+texture = ExtResource( 6 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 10, 16, 9, 16, 9, 15, 10, 15, 10, 15, 10, 15 )
+uv = PoolVector2Array( 10, 16, 9, 16, 9, 15, 10, 15, 10, 15, 10, 15 )
+bones = [ NodePath("hip"), PoolRealArray( 0, 0, 0, 0, 0, 0 ), NodePath("hip/left_leg"), PoolRealArray( 1, 1, 1, 1, 1, 1 ), NodePath("hip/right_leg"), PoolRealArray( 0, 0, 0, 0, 0, 0 ), NodePath("hip/spine"), PoolRealArray( 0, 0, 0, 0, 0, 0 ), NodePath("hip/spine/head"), PoolRealArray( 0, 0, 0, 0, 0, 0 ), NodePath("hip/spine/arm"), PoolRealArray( 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="right_leg" type="Polygon2D" parent="polygons"]
+position = Vector2( -9, -16 )
+texture = ExtResource( 6 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 9, 15, 9, 16, 10, 16, 10, 15 )
+uv = PoolVector2Array( 9, 15, 9, 16, 10, 16, 10, 15 )
+bones = [ NodePath("hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/left_leg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/right_leg"), PoolRealArray( 1, 1, 1, 1 ), NodePath("hip/spine"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/spine/head"), PoolRealArray( 0, 0, 0, 0 ), NodePath("hip/spine/arm"), PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 4 )
+anims/Run = SubResource( 5 )
 [connection signal="timeout" from="AtkCooldown" to="." method="_on_AtkCooldown_timeout"]
 
 [editable path="HitBox"]

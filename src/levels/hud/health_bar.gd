@@ -2,7 +2,7 @@ extends HBoxContainer
 
 
 var maximum_value = 20
-var current_heath = 0
+var current_heath = 10
 
 func initialize():
 	
