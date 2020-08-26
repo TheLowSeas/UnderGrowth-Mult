@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Template"
+config/name="UnderGrowth"
 run/main_scene="res://src/levels/main_menu/Main_Menue.tscn"
 
 [autoload]

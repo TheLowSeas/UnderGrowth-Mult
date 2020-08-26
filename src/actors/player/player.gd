@@ -1,19 +1,20 @@
 extends character
 
-onready var animatonPlayer = $AnimationPlayer
-onready var animationTree = $AnimationTree
-onready var animationState = animationTree.get("parameters/playback")
+onready var animationPlayer = $AnimationPlayer
 onready var SwordPivot = $SwordPivot
 onready var atkCooldown = $AtkCooldown
 onready var slashSpawn = $SwordPivot/SlashEffectSpawn
 onready var HitBox = $HurtBoxPiv/HurtBox/CollisionShape2D
 onready var HurtBoxPivot = $HurtBoxPiv
+onready var sprite = $polygons
+
+var animationState = "Idle"
 
 const slashEffect = preload("res://src/scripts/Effects/Slash_effect.tscn")
 
 slave var repl_position = Vector2.ZERO
 slave var repl_sword_rotation = 1.0
-slave var repl_local_mouse_pos = Vector2.ZERO
+slave var repl_flip = false
 slave var repl_anim_state = "Run"
 slave var repl_sword_scale = Vector2.ZERO
 slave var repl_slash_Effect_position = Vector2.ZERO
@@ -55,12 +56,20 @@ func get_move_dir():
 func animation_state():
 	
 	if velocity != Vector2.ZERO:
-		animationTree.set("parameters/Run/blend_position", get_local_mouse_position())
-		animationState.travel("Run")
+		animationState = "Run"
 	else:
-		animationTree.set("parameters/Idle/blend_position", get_local_mouse_position())
-		animationState.travel("Idle")
+		animationState = "Idle"
+		
+	if get_local_mouse_position().x < 0:
+		sprite.scale.x = -1
+		repl_flip = true
+	else:
+		sprite.scale.x = 1
+		repl_flip = false
 	
+	
+	
+	animationPlayer.play(animationState)
 
 func attack_check():
 	
@@ -82,13 +91,13 @@ func _on_AtkCooldown_timeout():
 	HitBox.set_disabled(true)
 
 func set_dominant_color(color):
-	$Chops_Sheet.modulate = color
+	$polygons.modulate = color
 
 func userUpdate():
 	rset("repl_position", position)
 	rset("repl_sword_rotation", $SwordPivot.rotation)
 	rset("repl_local_mouse_pos", get_local_mouse_position())
-	rset("repl_anim_state", animationState.get_current_node())
+	rset("repl_anim_state", animationState)
 	rset("repl_sword_scale", SwordPivot.get_scale())
 	rset("repl_hurt_box_piv", $HurtBoxPiv.rotation)
 	rset("hurt_box_on", $HurtBoxPiv/HurtBox/CollisionShape2D.disabled)
@@ -96,9 +105,14 @@ func userUpdate():
 func clientUpdate():
 	position = repl_position
 	$SwordPivot.rotation = repl_sword_rotation
-	animationTree.set("parameters/Idle/blend_position", repl_local_mouse_pos)
-	animationTree.set("parameters/Run/blend_position", repl_local_mouse_pos)
-	animationState.travel(repl_anim_state)
+	
+	if repl_flip:
+		sprite.scale.x = -1
+	else:
+		sprite.scale.x = 1
+	
+	
+	animationPlayer.play(repl_anim_state)
 	SwordPivot.set_scale(repl_sword_scale)
 	$HurtBoxPiv.rotation = repl_hurt_box_piv
 	$HurtBoxPiv/HurtBox/CollisionShape2D.disabled = hurt_box_on
