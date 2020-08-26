@@ -322,6 +322,7 @@ tracks/11/keys = {
 collision_layer = 2147483656
 collision_mask = 28
 script = ExtResource( 1 )
+max_health = 2
 knockback_strength = 250
 
 [node name="MoveShape" type="CollisionShape2D" parent="."]
