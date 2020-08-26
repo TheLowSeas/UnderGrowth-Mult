@@ -48,9 +48,9 @@ func set_player_info():
 script = SubResource( 1 )
 
 [node name="PanelHost" type="Panel" parent="."]
-margin_left = 54.37
+margin_left = 51.7853
 margin_top = 243.96
-margin_right = 326.37
+margin_right = 323.785
 margin_bottom = 443.96
 __meta__ = {
 "_edit_use_anchors_": false
@@ -132,10 +132,10 @@ __meta__ = {
 }
 
 [node name="PanelJoin" type="Panel" parent="."]
-margin_left = 57.0
-margin_top = 460.0
-margin_right = 316.0
-margin_bottom = 594.0
+margin_left = 57.8306
+margin_top = 447.708
+margin_right = 316.831
+margin_bottom = 581.708
 __meta__ = {
 "_edit_use_anchors_": false
 }
